@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 creationComplete="EvtInit(event)" initialize="EvtInit(event)"
+		 preinitialize="EvtInit(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;			
+			import spark.components.BusyIndicator;
+			import spark.components.Image;
+			
+			private var _bi:BusyIndicator;
+			private var _img:Image;
+			private var _inited:Boolean = false;
+						
+			public function set source(src:Object):void{
+				if (src && _inited){
+					_img = new Image();
+					_img.smooth = true;					
+					_img.source = src;
+					_img.verticalCenter = _img.horizontalCenter = 0;					
+					removeElement(_bi);
+					//_img.width = width;
+					//_img.scaleY = _img.scaleX;
+					//_img.height = height;
+					addElement(_img);
+				}
+			}
+			
+			private function Init():void{
+				if (! _inited){
+					_inited = true;
+					_bi = new BusyIndicator();
+					_bi.verticalCenter = 0;
+					_bi.horizontalCenter = 0;
+					addElement(_bi);
+				}
+			}
+			
+			protected function EvtInit(e:FlexEvent):void
+			{
+				Init();				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		
+	</fx:Declarations>
+</s:Group>
